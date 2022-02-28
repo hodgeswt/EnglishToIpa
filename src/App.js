@@ -6,6 +6,7 @@ export default function App() {
   const [fetchData, setFetch] = useState(false);
 
   useEffect(() => {
+    setOutput("Loading...");
     fetch(`https://english-to-ipa-server.herokuapp.com/${inputField}`)
       .then((response) =>
         response.json().then((data) => {
@@ -22,12 +23,17 @@ export default function App() {
   }, [fetchData]);
 
   return (
-    <div>
+    <div className="container">
       <h1>English to IPA Converter</h1>
       <input
         type="text"
         value={inputField}
         onChange={(e) => setInput(e.target.value)}
+        onKeyPress={(e) => {
+          if (e.key === "Enter") {
+            setFetch(!fetchData);
+          }
+        }}
       />
       <button onClick={() => setFetch(!fetchData)}>Convert</button>
       {outputField && inputField !== "" ? <p>{outputField}</p> : null}
