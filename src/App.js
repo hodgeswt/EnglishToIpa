@@ -6,7 +6,7 @@ export default function App() {
   const [fetchData, setFetch] = useState(false);
 
   useEffect(() => {
-    fetch(`http://localhost:80/${inputField}`)
+    fetch(`https://english-to-ipa-server.herokuapp.com/${inputField}`)
       .then((response) =>
         response.json().then((data) => {
           if (data.success !== undefined) {
